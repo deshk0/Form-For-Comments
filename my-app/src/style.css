@@ -1,0 +1,87 @@
+body{
+  background-color: lightseagreen;
+}
+
+.container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.form-container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.Form{    
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  bottom: 35vh;
+}
+
+.form-inpt-box{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.comments-field, .comment-more-box{
+  display: flex;
+  flex-direction: column;
+}
+.comment-box{
+  background-color: aquamarine;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 350px;
+}
+.comment-box-text{
+  margin: 10px 0;
+  overflow-x: hidden;
+}
+.comment-box-name{
+  font-size: 14px;
+  overflow-x: hidden;
+}
+.comments-more{
+  margin-bottom: 20px;
+}
+.comments-pagination{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.comments-pagination-pages{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  width: 350px;
+}
+.comments-pagination-pages-input{
+  transition: 0.3s;
+
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  width: 30px;
+}
+.comments-pagination-pages-input:hover{
+  transition: 0.3s;
+  color: white;
+}
+.comments-pagination-pages-input:focus{
+  color: white;
+
+}
+.comments-pagination-pages-input_current{
+  color: white;
+  background-color: transparent;
+  border: none;
+}
