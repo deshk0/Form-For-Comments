@@ -1,2 +1,2 @@
 # Form-For-Comments
-basic form for coments
+basic form for comments
