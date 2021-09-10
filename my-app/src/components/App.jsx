@@ -119,13 +119,13 @@ export default class App extends React.Component{
         }else{
             if(user.name === ''){
                 this.setState({
-                    validMessage_1: 'Это обязательное поле'
+                    validMessage_1: '*это обязательное поле'
                 })
             }
             
             if(user.text === ''){
                 this.setState({
-                    validMessage_2: 'Это обязательное поле'
+                    validMessage_2: '*это обязательное поле'
                 })
             }
         }
@@ -133,7 +133,8 @@ export default class App extends React.Component{
 
     }
 
-    moreComments(){
+    moreComments(e){
+        e.preventDefault()
         let commentsField = document.getElementsByClassName('comments-field')
 
         if(this.state.currentPage > 1){
@@ -223,15 +224,21 @@ export default class App extends React.Component{
         return(
             <div className = 'container'>
                 <div>
+                    <h2>Комментарии от разработчиков</h2>
+                    <h4>
+                        Вы даже не представляете что здесь можно найти)
+                    </h4>
+
                     <p>Страница {this.state.currentPage}</p>
                     <div className = "comments-field">
                         <div class = 'comment-box'>
                             
                         </div>
                     </div>
-
-                    <div onClick = {this.moreComments = this.moreComments.bind(this)} className = "comments-more">
-                        Еще комменты
+                    <div className = "comments-more">
+                        <a  href='/' onClick = {this.moreComments = this.moreComments.bind(this)} >
+                            Еще комменты
+                        </a>
                     </div>
                     
                     <div className = "comments-pagination">
@@ -241,20 +248,21 @@ export default class App extends React.Component{
                     </div>
                 </div>
                 <div className = "form-container">
+                    <h5>Не забудте оставить свой комментарий на память )</h5>
                     <div className = 'Form'>
                         <div className="form-inpt-box">
-                            <label>Ваше имя</label>
-                            <input id = 'form-name' placeholder = 'Имя' />
-                            {this.state.validMessage_1}
+                            <label className = 'form-label'>Ваше имя</label>
+                            <input className="form-inpt-box-input" id = 'form-name' placeholder = 'Имя' type='text' name = 'name' />
+                            <div className = 'validation'>{this.state.validMessage_1}</div>
 
                         </div>
                         <div className="form-inpt-box">
-                            <label>Введите комментарий</label>
-                            <textarea id = 'form-text' placeholder = 'Текст' />
-                            {this.state.validMessage_2}
+                            <label className = 'form-label'>Введите комментарий</label>
+                            <textarea className="form-inpt-box-input" id = 'form-text' placeholder = 'Текст' type='text' />
+                            <div className = 'validation'>{this.state.validMessage_2}</div>
 
                         </div>
-                        <button onClick = {this.addComment = this.addComment.bind(this)}>Отправить</button>
+                        <button className = 'form-button' onClick = {this.addComment = this.addComment.bind(this)}>Отправить</button>
                     </div>
                 </div>
             </div>
