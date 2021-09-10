@@ -9,7 +9,7 @@ export default class App extends React.Component{
             comments: [
 
             ],
-            currentPage: '',
+            currentPage: 'Загрузка...',
             lastPage: 'no',
 
             validMessage_1: '',
@@ -23,7 +23,6 @@ export default class App extends React.Component{
 
     componentDidMount(){
         let commentsField = document.getElementsByClassName('comments-field')
-        let paginationContainer = document.getElementsByClassName('comments-pagination-pages')
         let pages = []
 
         fetch(`https://jordan.ashton.fashion/api/goods/30/comments`)
@@ -69,20 +68,17 @@ export default class App extends React.Component{
                 })
             })
         })
-    }
-
-    onClick(){
-        
-        fetch(`https://jordan.ashton.fashion/api/goods/30/comments?page=${this.state.lastPage}`)
-        .then(response => response.json())
-        .then(res => console.log(res))
-        console.log(this.state.comments)    
-        console.log(this.state.currentPage)    
-        console.log(this.state.lastPage)
+        .catch(err => {
+            commentsField[0].innerHTML = 
+                `
+                    <div class = 'comment-box'>
+                        <h1>Упс, кажеться сервер не работает, попробуйте позже )</h1>
+                    </div>
+                `
+        })
     }
 
     addComment(){
-        console.log('go')
         let commentsField = document.getElementsByClassName('comments-field')
 
         let userName = document.getElementById('form-name')
@@ -103,7 +99,6 @@ export default class App extends React.Component{
               body: JSON.stringify(user)
             })
             .then(response => response.json())
-            .then(res => console.log(res))
             .then(res => {
                 commentsField[0].innerHTML += `
                     <div class = 'comment-box'>
@@ -112,6 +107,14 @@ export default class App extends React.Component{
                     </div>
                 `
 
+            })
+            .catch(err => {
+                commentsField[0].innerHTML = 
+                    `
+                        <div class = 'comment-box'>
+                            <h1>Сервер по прежнему не работает )</h1>
+                        </div>
+                    `
             })
         }else{
             if(user.name === ''){
@@ -129,9 +132,8 @@ export default class App extends React.Component{
         
 
     }
+
     moreComments(){
-        console.log('more comments')
-        console.log(this.state.lastPage)
         let commentsField = document.getElementsByClassName('comments-field')
 
         if(this.state.currentPage > 1){
@@ -163,10 +165,18 @@ export default class App extends React.Component{
                     })
                 })
             })
+            .catch(err => {
+                commentsField[0].innerHTML = 
+                    `
+                        <div class = 'comment-box'>
+                            <h1>ХВАТИТ ПРОБОВАТЬ СЕРВЕР НЕ ОТВЕЧАЕТ СКАЗАЛИ ЖЕ )</h1>
+                        </div>
+                    `
+            })
         }
     }
+    
     pagination(event){
-        console.log(event.target.value)
         let current = Number(event.target.value)
         let commentsField = document.getElementsByClassName('comments-field')        
 
@@ -198,6 +208,14 @@ export default class App extends React.Component{
                 `
             })
         })
+        .catch(err => {
+            commentsField[0].innerHTML = 
+                `
+                    <div class = 'comment-box'>
+                        <h1>Упс, кажеться сервер не работает, попробуйте позже )</h1>
+                    </div>
+                `
+        })
 
     }
 
@@ -208,7 +226,7 @@ export default class App extends React.Component{
                     <p>Страница {this.state.currentPage}</p>
                     <div className = "comments-field">
                         <div class = 'comment-box'>
-
+                            
                         </div>
                     </div>
 
